@@ -42,6 +42,7 @@ class Currency_converser:
     
     def menu(self):
         print('press q to exit')
+        print('currency converser')
         print('origen corrency')
         self.print_options()
         from_currency=input()
@@ -56,8 +57,11 @@ class Currency_converser:
             value=float(input())
             conversion=(1/self.list_rate_cop_to[from_currency])*self.list_rate_cop_to[to_currency]*value
             print(f'result: {value} {self.list_name_conversions[from_currency]} are {conversion} {self.list_name_conversions[to_currency]}')
-        
-        
+            print('''
+            
+            ''')
+
+
 def run():
     converser=Currency_converser()
     while True:
