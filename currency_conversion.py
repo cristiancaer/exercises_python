@@ -58,11 +58,10 @@ class Currency_converser:
             print(f'result: {value} {self.list_name_conversions[from_currency]} are {conversion} {self.list_name_conversions[to_currency]}')
         
         
-def main():
+def run():
     converser=Currency_converser()
-    
     while True:
         converser.menu()
 
 if __name__=='__main__':
-    main()
+    run()
