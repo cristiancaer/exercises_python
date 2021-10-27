@@ -10,14 +10,10 @@ class KeyGenerator:
         key=''
         for i in range(length_key):
             key+=random.choice(self.available_charecters)
-        
         return key
 
     def __str__(self) -> str:
         return f'available characters: \n {self.available_charecters}'
-
-
-
 
 def run():
     key_gen=KeyGenerator()
