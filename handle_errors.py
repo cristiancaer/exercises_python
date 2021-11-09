@@ -12,9 +12,9 @@ def run():
 
         except (ValueError, TypeError):
             print('value must be a integer number')
-        except TypeError:
-            print(' cant proccess a character')
-        
+
+        SyntaxError
+        ValueError
 
         
 if __name__=='__main__':
