@@ -1,16 +1,6 @@
 from os import system
-def boxing(func:object)->object:
-    def wrapper(text: str)->None:
-        print(" "+"_"*(1+len(text)))
-        print('/'+"_"*(len(text))+"/|")
-        print('|'+" "*(len(text))+"||")
-        func("|"+text+"||")
-        print('|'+"_"*(len(text))+'|/')
-    return wrapper
 
-@boxing
-def text_render(text:str)->None:
-    print(text)
+# enclosures 
 def multi_by(multiplier: int)->object:
     def wrapper(multiplicand:str)->None:
         if multiplicand.isnumeric():
@@ -24,8 +14,20 @@ def multi_by(multiplier: int)->object:
             text='input was not a number'
         return text
     return wrapper
- 
 multi_by3=multi_by(3)
+# decorators
+def boxing(func:object)->object:
+    def wrapper(text: str)->None:
+        print(" "+"_"*(1+len(text)))
+        print('/'+"_"*(len(text))+"/|")
+        print('|'+" "*(len(text))+"||")
+        func("|"+text+"||")
+        print('|'+"_"*(len(text))+'|/')
+    return wrapper
+
+@boxing
+def text_render(text:str)->None:
+    print(text)
 
 if __name__=='__main__':
     system('clear')
