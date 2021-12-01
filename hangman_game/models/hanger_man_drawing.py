@@ -106,13 +106,21 @@ class HangManDrawing:
         for x,y,char in self.TRAMP_CLOSED:
             draw_map[x][y]=char
         return draw_map
-    def del_trap(self,draw_map):
+    def del_trap(self,draw_map:list):
         for x,y,_ in self.TRAMP_CLOSED:
             draw_map[x][y]=' '
         return draw_map
+def decorate_text(text:str)->str:
 
+    output=" "+"_"*(1+len(text))+'\n'
+    output+='/'+"_"*(len(text))+"/|"+'\n'
+    output+='|'+" "*(len(text))+"||"+'\n'
+    output+="|"+text+"||"+'\n'
+    output+='|'+"_"*(len(text))+'|/'+'\n'
+    return output
 if __name__=='__main__':
+    text=decorate_text('word in game')
+    print(text)
     draw=HangManDrawing()
     name=draw.LIST_ELEMENTS[0]
-
     print(draw.ELEMENTS[name])

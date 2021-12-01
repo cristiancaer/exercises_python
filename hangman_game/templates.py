@@ -1,7 +1,10 @@
-from models.hanger_man_drawing import HangManDrawing
+from models.hanger_man_drawing import HangManDrawing, decorate_text
 class HangManRender:
     drawing=HangManDrawing()
-    def __init__(self,level) -> None:
+    def __init__(self,level: str='easy') -> None:
+        """ the game has three class of levels
+            :param level= 'easy' or 'medium' or 'high'
+        """
         self.initialize()
         self.level=level
     def initialize(self):
@@ -40,12 +43,31 @@ class HangManRender:
         #join rows
         drawing='\n'.join(drawing)
         return drawing,game_over
+    def set_word_game(self,word:str):
+        self.word_game=[char for char in word]
+        self.word_buffer=['_ ' for _ in range(len(word))]
+    def add_character_render(self,char:str):
+        ret=False
+        if (len(char)==1 )and (char in self.word_game):
+            ret=True
+            for i,char_in_word in enumerate(self.word_game):
+                if char==char_in_word:
+                    self.word_buffer[i]=char
+                
+        output=decorate_text(''.join(self.word_buffer))
+
+        return ret,output
 
 if __name__=='__main__':
     render_easy=HangManRender('low')
     render_medium=HangManRender('medium')
     render_high=HangManRender('high')
     game=render_high
+    game.set_word_game('lion')
+    ret,word=game.add_character_render('a')
+    print(word)
+    ret,word=game.add_character_render('i')
+    print(word)
     while True:
         draw,game_over=game.add_render()
         if game_over:
