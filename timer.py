@@ -2,18 +2,32 @@ from threading import Timer
 import time
 class RepeatTimer(Timer):
     def run(self):
-        print("outside while")
         while not self.finished.wait(self.interval):
             self.function(*self.args, **self.kwargs)
+
 def dummyfn(msg="foo"):
     print(msg)
 
-timer = RepeatTimer(0.1, dummyfn)
-timer.cancel()
-timer.start()
-time.sleep(1)
+class TimerHandler:
+    def __init__(self,interval,target_function,) -> None:
+        self.timer=None
+        self.interval=interval
+        self.target_function=target_function
+    def start(self):
+        self.timer=RepeatTimer(self.interval,self.target_function)
+        self.timer.setDaemon(True)
+        self.timer.start()
+    def change_interval(self,interval):
+        self.interval=interval
+        self.timer.cancel()
+        self.start()
+    def cancel(self):
+        self.timer.cancel()
 
-timer = RepeatTimer(1, dummyfn,args=('foo2',))
-timer.start()
-time.sleep(2)
-timer.cancel()
+if __name__=='__main__':
+    periode=1
+    timer=TimerHandler(periode,dummyfn)
+    timer.start()
+    time.sleep(3)
+    timer.change_interval(2)
+    time.sleep(6)
